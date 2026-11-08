@@ -5,16 +5,21 @@ Landing page de vendas do curso online **Gestão de Clínicas**, da DocFounder, 
 - **Site publicado:** https://empowered-permission-742520.framer.app
 - **Projeto no Framer (para editar):** https://framer.com/projects/lA4RpL4bKCRPOPfc8BDQ
 
-> O Framer não exporta o site como código. Este repositório guarda a documentação, a copy e os arquivos de mídia do projeto. Alterações no layout e nos textos são feitas no Framer e depois publicadas por lá.
+Este repositório tem **a LP em código** (HTML, CSS e JavaScript, sem dependências), pronta para publicar pelo **GitHub Pages** em `curso.docfounder.com.br`. A versão original no Framer continua existindo; escolha uma das duas como oficial.
 
 ## Conteúdo do repositório
 
 | Caminho | O que é |
 |---|---|
+| `index.html` | A página |
+| `styles.css` | Estilos (cores, tipografia, layout e versões tablet/celular) |
+| `script.js` | Link do checkout (variável `CHECKOUT_URL`) e repasse de UTMs |
+| `CNAME` | Domínio usado pelo GitHub Pages (`curso.docfounder.com.br`) |
+| `assets/icones/` | Ícones Phosphor embutidos (sem depender de CDN) |
 | `COPY.md` | Texto completo da página, seção por seção, como está publicado |
 | `DESIGN.md` | Sistema visual: cores, tipografia, componentes e responsividade |
 | `assets/logo/` | Logo DocFounder (versões branca e verde) e símbolo, em SVG |
-| `assets/fotos/` | Fotos do Thiago tiradas de quadros do reels “Precificação” |
+| `assets/fotos/` | Fotos do Thiago (palco e quadros do reels “Precificação”) |
 | `assets/video/` | Reels “Precificação” comprimido (720p, ~18 MB) usado no hero, e a imagem de capa |
 
 ## A oferta
@@ -45,13 +50,28 @@ A copy foi escrita a partir das principais dores relatadas pelos clientes da con
 
 ## Pendências
 
-- [ ] Conectar o link de checkout ao botão “Quero fazer minha inscrição!” (seção Oferta)
-- [ ] Domínio próprio (ex.: `curso.docfounder.com.br`) em *Site Settings → Domains* no Framer
+- [ ] Colar o link de checkout em `script.js` (`CHECKOUT_URL`)
+- [ ] Ativar o GitHub Pages e criar o CNAME `curso` no Registro.br
 - [ ] Seção de depoimentos com clientes autorizados
 - [ ] Trocar as fotos de banco de imagem dos cards de módulo (02 a 08) por fotos reais
 
-## Como editar
+## Publicar no GitHub Pages com o domínio do Registro.br
 
-1. Abra o projeto no Framer pelo link acima.
-2. A página é a **Home**. Os componentes reutilizáveis (**Botão CTA** e **Pergunta frequente**) ficam em *Assets*.
-3. Use **▶ Preview** para conferir e **Publish** para atualizar o site no ar.
+1. No GitHub: **Settings → Pages** → *Source*: **Deploy from a branch** → Branch **main** / **(root)** → **Save**.
+2. Ainda em **Settings → Pages**, confira se *Custom domain* mostra `curso.docfounder.com.br` (vem do arquivo `CNAME`).
+3. No **Registro.br** → domínio `docfounder.com.br` → **DNS** → **Configurar zona DNS** → **Nova entrada**:
+   - Tipo **CNAME** · Nome **curso** · Dados **capthiagomoura-ai.github.io**
+   - Não altere os registros existentes de `www` nem do domínio principal.
+4. Depois que o DNS propagar (minutos a algumas horas), volte em **Settings → Pages** e marque **Enforce HTTPS**.
+
+Para usar outro subdomínio, troque o conteúdo do arquivo `CNAME` e o *Nome* do registro no Registro.br.
+
+## Conectar o checkout
+
+Abra `script.js` e cole o link de pagamento em `CHECKOUT_URL`. O botão “Quero fazer minha inscrição!” passa a levar ao checkout, repassando automaticamente os parâmetros de campanha (`utm_*`, `fbclid`, `gclid`).
+
+## Editar a página
+
+- Textos: `index.html` (a copy completa também está em `COPY.md`).
+- Cores e fontes: variáveis no topo de `styles.css`.
+- Para testar localmente, abra `index.html` no navegador.
